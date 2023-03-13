@@ -16,15 +16,14 @@ var chooseName;
 
 inputTxt.addEventListener('input',(input)=>{
     enteredWord = input.target.value;
-    console.log(enteredWord);
 });
 inputTxt.addEventListener('keyup',(e)=>{
     if (e.key === 'Enter') check();
-    if (e.keyCode === 187) next();
+    if (e.keyCode === 187) generateNewCharakter();
 });
 
 checkbtn.addEventListener('click',check);
-nextbtn.addEventListener('click',next);
+nextbtn.addEventListener('click',generateNewCharakter);
 
 function check(){
     if (real){
@@ -57,10 +56,6 @@ function check(){
 }
 
 
-function next(){
-    generateNewCharakter();
-}
-
 function generateNewCharakter(){
     if(usedNumsReal.length<realCharakters.length){
         newCharakter = realCharakters[Math.floor(Math.random()*realCharakters.length)];
@@ -68,6 +63,7 @@ function generateNewCharakter(){
             generateNewCharakter();
         }
         usedNumsReal.push(newCharakter[0]-1);
+        usedNumsReal = delsame(usedNumsReal);
         console.log(usedNumsReal);
         chooseName = Math.floor(Math.random()*2+1);
         nameOnTop.innerHTML = newCharakter[chooseName];
@@ -81,6 +77,7 @@ function generateNewCharakter(){
             generateNewCharakter();
         }
         usedNumsFake.push(newCharakter[0]-1);
+        usedNumsFake = delsame(usedNumsFake);
         console.log(usedNumsFake);
         description.innerHTML = newCharakter[2];
         inputTxt.value = '';
@@ -103,4 +100,13 @@ function isCorrect(word1,word2){
     }
     console.log(count);
     if(newWord.length-2<=count) return true;
+}
+
+function delsame(list){
+    let list2 = [];
+    let a;
+    for(let i=0; i<list.length;i++){
+        list2.includes(list[i]) ? a=1 : list2.push(list[i]);
+    }
+    return list2
 }
