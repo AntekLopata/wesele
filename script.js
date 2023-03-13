@@ -86,8 +86,9 @@ function generateNewCharakter(){
     }
     else{
         nameOnTop.innerHTML = 'End of quiz!';
-        description.innerHTML = '';
+        description.innerHTML = 'To play again click "Next"';
         inputTxt.value = '';
+        usedNumsReal = [], usedNumsFake = [];
     }
 }
 
