@@ -29,7 +29,7 @@ nextbtn.addEventListener('click',next);
 function check(){
     if (real){
         if (chooseName == 1){
-            if (enteredWord == realCharakters[newCharakter[0]-1][2]){
+            if (isCorrect(enteredWord, realCharakters[newCharakter[0]-1][2])){
                 description.innerHTML = realCharakters[newCharakter[0]-1][3];
             }
             else {
@@ -37,7 +37,7 @@ function check(){
             }
         }
         else{
-            if (enteredWord == realCharakters[newCharakter[0]-1][1]){
+            if (isCorrect(enteredWord, realCharakters[newCharakter[0]-1][1])){
                 description.innerHTML = realCharakters[newCharakter[0]-1][3];
             }
             else {
@@ -46,7 +46,7 @@ function check(){
         }
     }
     else{
-        if (enteredWord == newCharakter[1]){
+        if (isCorrect(enteredWord,newCharakter[1])){
             nameOnTop.innerHTML = 'Good Answer!';
         }
         else{
@@ -94,3 +94,13 @@ function generateNewCharakter(){
     }
 }
 
+function isCorrect(word1,word2){
+    let newWord = word1;
+    let orginalWord = word2;
+    let count = 0;
+    for(let i = 0; i<=(newWord.length>orginalWord.length ? newWord.length : orginalWord.length); i++){
+        if (newWord[i]==orginalWord[i]) count++;
+    }
+    console.log(count);
+    if(newWord.length-2<=count) return true;
+}
